@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./assets/css/my-css.css">
+
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="./assets/css/preview-image.css">
+
+    <link rel="stylesheet" href="./assets/fontawesome/v6.2.0/css/all.min.css">
+    <script src="./assets/fontawesome/v6.2.0/js/all.min.js"></script>
+
+    <!-- <script src="./assets/izitoast/dist/js/iziToast.min.js"></script>
+    <script src="./assets/izitoast/dist/js/iziToast.init.js"></script> -->
+
+    <link rel="stylesheet" href="./assets/New folder/toastr.min.css">
+    <script src="./assets/New folder/toastr.init.js"></script>
+    <script src="./assets/New folder/toastr.min.js"></script>
+    <script src="./assets/New folder/app.min.js"></script>
+    <script src="./assets/New folder/vendor.min.js"></script>
+
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script scr="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+
+    <script src="./assets/jquery/jquery-3.6.0.min.js"></script>
+
+
+    <link rel="stylesheet" href="./assets/img">
+
+    <link rel="stylesheet" href="./assets/izitoast/dist/css/iziToast.min.css">
+
+    <script src="./assets/js/AppBase.js"></script>
+
+    <script src="./assets/sweetalert2/v11.7.3/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="./assets/sweetalert2/v11.7.3/sweetalert2.min.css">
+
+    <script>
+        window.onload = ()=>{
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+            toastr["error"]("Không thể thêm vào giò hàng", "Số lượng không có sẵn")
+        }
+    </script>
+
+    </head>
+<body>
+    <div class="back-ground border-radius">
+        <div class="side-head-content border-radius">
+            <div class="side border-radius">
+                <div class="side-head border-radius">
+                    <h5 style="font-weight: bold; color: var(--xanh-3);">BOOK STORE</h5>
+                    <p>『 ADMIN 』</p>
+                </div>
+                <div class="side-content-home border-radius">
+                    <a href="">
+                        <div class="side-content-sub hover">
+                            <i class="fa-solid fa-house"></i>
+                            <p>Home</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="side-content border-radius">
+                    <div class="side-content-head"><h5>Book</h5></div>
+                    <a href="">
+                        <div class="side-content-sub hover">
+                            <i class="fa-regular fa-rectangle-list"></i>
+                            <p>List</p>
+                        </div>
+                    </a>
+                    <a href="">
+                        <div class="side-content-sub hover">
+                            <i class="fas fa-cart-plus"></i>
+                        <p>Cart</p>
+                        </div>
+                    </a>
+                    <a href="">
+                        <div class="side-content-sub hover">
+                            <i class="fas fa-cart-arrow-down"></i>
+                        <p>Checkout</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- -------------------------------------------------Content-------------------------------------------- -->
+            <div class="container">
+                <div id="modalCreateProduct" class="modal-show" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+                    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Product information</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="modal-alert-danger hide"></div>
+                                <form id="frmProduct" enctype="multipart/form-data">
+                                    <fieldset class="row g-3">
+                                        <div class="mb-3 col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-12 col-form-label">Name</label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" id="productName" name="productName" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-12 col-form-label">Description</label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" id="description" name="description" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <section>
+                                                <div class="wrapper">
+                                                    <div class="image-preview">
+                                                        <canvas id="canvas"></canvas>
+                                                    </div>
+                                                    <div class="content">
+                                                        <div class="icon">
+                                                            <i class="fas fa-cloud-upload-alt"></i>
+                                                        </div>
+                                                        <div class="text">
+                                                            No file chosen, yet!
+                                                        </div>
+                                                        <div class="text">
+                                                            Max file size = 2MB
+                                                        </div>
+                                                    </div>
+                                                    <div class="clear-image-preview">
+                                                        <i class="fas fa-times"></i>
+                                                    </div>
+                                                    <div class="file-name">
+                                                        Change image
+                                                    </div>
+                                                </div>
+                                                <input type="file" id="imageFile" accept="image/jpeg, image/png" hidden />
+                                            </section>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" id="btnSave" class="btn btn-outline-success">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- -----------------------------------------------End Content------------------------------------------ -->
+        </div>
+    </div>
+    
+    
+</body>
+</html>

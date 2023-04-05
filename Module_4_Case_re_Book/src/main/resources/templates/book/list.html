@@ -1,0 +1,980 @@
+
+<th:block th:replace="layout/head-and-headbody"/>
+<!-- ------------------------------------Modal Create----------------------------------- -->
+<div class="cover-modal">
+    <div id="modalCreateBook" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Book</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-alert-danger hide"></div>
+                    <form id="createForm" enctype="multipart/form-data">
+                        <fieldset class="row g-3">
+                            <div class="mb-3 col-md-8">
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-form-label">Name</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" id="nameCre" name="nameCre" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-form-label">Author</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" id="authorCre" name="authorCre" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-form-label">Price</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" id="priceCre" name="priceCre" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-form-label">Quantity</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" id="quantityCre" name="quantityCre" class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <section>
+                                    <div class="wrapper">
+                                        <div class="image-preview">
+                                            <canvas id="canvas"></canvas>
+                                        </div>
+                                        <div class="content">
+                                            <div class="icon">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                            </div>
+                                            <div class="text">
+                                                No file chosen, yet!
+                                            </div>
+                                            <div class="text">
+                                                Max file size = 2MB
+                                            </div>
+                                        </div>
+                                        <div class="clear-image-preview">
+                                            <i class="fas fa-times"></i>
+                                        </div>
+                                        <div class="file-name">
+                                            Change image
+                                        </div>
+                                    </div>
+                                    <input type="file" id="imageFile" accept="image/jpeg, image/png" hidden />
+                                </section>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="btnCreateBook" class="btn btn-outline-success">
+                        Create
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ------------------------------------End Modal Create----------------------------------- -->
+
+<!-- ------------------------------------Modal Update----------------------------------- -->
+<div class="cover-modal">
+    <div id="modalUpdateBook" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Book</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-alert-danger hide"></div>
+                    <form id="updateForm" enctype="multipart/form-data">
+                        <fieldset class="row g-3">
+                            <div class="mb-3 col-md-8">
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-form-label">Name</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" id="nameUp" name="nameUp" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-form-label">Author</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" id="authorUp" name="authorUp" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-form-label">Price</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" id="priceUp" name="priceUp" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-form-label">Quantity</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" id="quantityUp" name="quantityUp" class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <section>
+                                    <div class="wrapper">
+                                        <div class="image-preview">
+                                            <canvas id="canvasUp"></canvas>
+                                        </div>
+                                        <div class="content">
+                                            <div class="icon">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                            </div>
+                                            <div class="text">
+                                                No file chosen, yet!
+                                            </div>
+                                            <div class="text">
+                                                Max file size = 2MB
+                                            </div>
+                                        </div>
+                                        <div class="clear-image-preview">
+                                            <i class="fas fa-times"></i>
+                                        </div>
+                                        <div class="file-name">
+                                            Change image
+                                        </div>
+                                    </div>
+                                    <input type="file" id="imageFileUp" accept="image/jpeg, image/png" hidden />
+                                </section>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="btnUpdateBook" class="btn btn-outline-success">
+                        Update
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ------------------------------------End Modal Update----------------------------------- -->
+
+
+<!-- -------------------------------------------------Content-------------------------------------------- -->
+<div class="head-content border-radius">
+    <!-- Head Content -->
+    <div class="head border-radius" >
+        <div class="col-4"><h2 style="font-weight: bold; padding-left: 10px;">Book List</h2>  </div>
+        <div class="col-4">
+            <div >
+
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="input-group rounded">
+                <input id="keyWord" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                <span class="input-group-text border-0" id="btnSearch">
+                              <i class="fas fa-search"></i>
+                            </span>
+            </div>
+        </div>
+        <div class="col-1" style="display: flex; justify-content: end;">
+            <button id="btnShowCreateModal" class="btn btn-outline-success"><i class="fa-solid fa-book-medical"></i></button>
+        </div>
+    </div>
+    <!-- End Head Content -->
+    <div class="content border-radius">
+        <div class="table-div-book">
+            <table id="tbBook" class="table-book">
+                <thead style="color: rgb(182, 182, 182);">
+                    <tr>
+                        <th style="display: flex; align-items: center;width: 50px; padding-left:10px">#
+                            <div style="display: flex; flex-direction: column; padding-left: 5px; align-items: center;">
+                                <i class="fa-solid fa-sort-up sort" data-column="id" data-ascdesc="asc"></i>
+                                <i class="fa-solid fa-sort-down sort sort-active" data-column="id" data-ascdesc="desc"></i>
+                            </div>
+                            </th>
+                        <th>Cover</th>
+                        <th style="display: flex; align-items: center;">Name
+                            <div style="display: flex; flex-direction: column; padding-left: 5px; align-items: center;">
+                                <i class="fa-solid fa-sort-up sort" data-column="name" data-ascdesc="asc"></i>
+                                <i class="fa-solid fa-sort-down sort" data-column="name" data-ascdesc="desc"></i>
+                                <input type="hidden" id="sort_column" >
+                                <input type="hidden" id="sort_orderBy" >
+                            </div>
+                        </th>
+                        <th>Author</th>
+                        <th>Price</th>
+                        <th style="width: 60px;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!----------------------------Pagging --------------------------->
+    <div class="foot">
+        <div class="col-10"></div>
+        <div class="col-1">
+            <div class="table-page">
+                <nav aria-label="Page navigation example">
+                    <ul id="renderPage" class="pagination" style="display: flex">
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!---------------------------End Pagging -------------------------->
+</div>
+<!-- -----------------------------------------------End Content------------------------------------------ -->
+</div>
+</div>
+
+<!-- -------------------------------------Script------------------------------------ -->
+
+<th:block th:replace="layout/ajax-script"/>
+
+<script>
+    const page = {
+        urls: {
+            findBookById: AppBase.API_BOOK,
+            doCreate: AppBase.API_BOOK + "/create",
+            doDelete: AppBase.API_BOOK + "/delete",
+            doUpdate: AppBase.API_BOOK + "/update",
+            doEveryThing: AppBase.API_BOOK,
+
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            loadData: {},
+            commands: {},
+        }
+    }
+
+    let currentBookId;
+
+    let currentPageNumber = 0;
+    let keyWord = $('#keyWord').val();
+    let column = "";
+    let orderBy = "";
+
+    let book = new Book();
+    let bookAvatar = new BookAvatar();
+
+    page.dialogs.elements.createForm = $('#createForm');
+    page.dialogs.elements.updateForm = $('#updateForm');
+
+    page.elements.btnShowCreateModal = $('#btnShowCreateModal');
+
+    page.dialogs.elements.createForm = $("#createForm");
+    page.dialogs.elements.updateForm = $("#updateForm");
+
+    page.dialogs.elements.modalCreateBook = $('#modalCreateBook');
+    page.dialogs.elements.modalUpdateBook = $('#modalUpdateBook');
+
+    page.dialogs.elements.btnCreateBook = $('#btnCreateBook');
+    page.dialogs.elements.btnUpdateBook = $('#btnUpdateBook');
+    page.dialogs.elements.btnSearch = $('#btnSearch')
+
+    page.dialogs.elements.btnSort = $('#btnSort');
+
+    page.dialogs.elements.asc_name = $('#asc_name');
+    page.dialogs.elements.desc_name = $('#desc_name');
+
+    page.dialogs.elements.sort_column = $('#sort_column');
+    page.dialogs.elements.sort_orderBy = $('#sort_orderBy');
+
+    page.dialogs.elements.keyWord = $('#keyWord');
+
+    page.dialogs.elements.nameCre = $('#nameCre');
+    page.dialogs.elements.authorCre = $('#authorCre');
+    page.dialogs.elements.priceCre = $('#priceCre');
+    page.dialogs.elements.quantityCre = $('#quantityCre');
+
+    page.dialogs.elements.nameUp = $('#nameUp');
+    page.dialogs.elements.authorUp = $('#authorUp');
+    page.dialogs.elements.priceUp = $('#priceUp');
+    page.dialogs.elements.quantityUp = $('#quantityUp');
+
+    page.dialogs.elements.wrapper = $("section .wrapper");
+    page.dialogs.elements.wrapperContent = $("section .wrapper .content");
+    page.dialogs.elements.imagePreview = $("section .image-preview");
+    page.dialogs.elements.btnClearImagePreview = $(".clear-image-preview i");
+
+    page.dialogs.elements.imageFile = $("#imageFile");
+    page.dialogs.elements.imagePreviewCanvas = $("section .image-preview canvas");
+    page.dialogs.elements.canvas = $("#canvas");
+    page.dialogs.elements.context = page.dialogs.elements.canvas[0].getContext('2d');
+    page.dialogs.elements.imagePreviewCanvas.css("display", "none");
+    page.dialogs.elements.divImagePreview = $("#modalCreateBook div.image-preview");
+    page.dialogs.elements.divFileName = $("#modalCreateBook div.file-name");
+
+    page.dialogs.elements.imageFileUp = $("#imageFileUp");
+    page.dialogs.elements.imagePreviewCanvasUp = $("section .image-preview #canvasUp");
+    page.dialogs.elements.canvasUp = $("#canvasUp");
+    page.dialogs.elements.contextUp = page.dialogs.elements.canvasUp[0].getContext('2d');
+    page.dialogs.elements.imagePreviewCanvasUp.css("display", "none");
+    page.dialogs.elements.divImagePreviewUp = $("#modalUpdateBook div.image-preview");
+    page.dialogs.elements.divFileNameUp = $("#modalUpdateBook div.file-name");
+
+    page.dialogs.commands.doEveryThing = () => {
+
+        $.ajax({
+            type: 'POST',
+            contentType: false,
+            cache: false,
+            processData: false,
+            url: page.urls.doEveryThing + '/kw=' + keyWord + '&page=' + currentPageNumber + '&sort=' + column + ',' + orderBy,
+        })
+            .done((data) => {
+
+                $('#tbBook tbody tr').remove();
+
+                listBook = data.content;
+
+                currentPageNumber = data.pageable.pageNumber;
+
+                totalPages = data.totalPages;
+
+                selectedPage = data.pageable.pageNumber;
+
+                totalElements = data.totalElements;
+
+                $.each(listBook, (i, item) => {
+
+                    book = item;
+                    bookAvatar.fileFolder = item.fileFolder;
+                    bookAvatar.fileName = item.fileName
+
+                    let str = renderBook(book, bookAvatar);
+                    $('#tbBook tbody').append(str);
+
+                    let numberOrder = 0;
+
+                    if( column == 'id' & orderBy == 'asc'){
+                        numberOrder = (5 * (totalPages-currentPageNumber-1)) - i + 2;
+                    } else {
+                        numberOrder = (5 * currentPageNumber) + i + 1;
+                    }
+
+                    $('#td_' + book.id).append(numberOrder);
+
+                })
+
+                // for (let i = totalElements; i > 0; i--){
+                //     let numberOrder = (5 * currentPageNumber) + i + 1;
+                //     $('#td_' + book.id).append(numberOrder);
+                // }
+
+
+
+                let strPage = renderPagination(totalPages, selectedPage);
+                $('#renderPage').empty().append(strPage);
+
+                page.commands.addEventClick();
+
+                toastSuccess("Result");
+
+            })
+            .fail(() => {
+                toastError("Result Fail");
+            })
+    }
+
+    page.dialogs.commands.doUpdate = () => {
+        let name = page.dialogs.elements.nameUp.val();
+        let author = page.dialogs.elements.authorUp.val();
+        let price = page.dialogs.elements.priceUp.val();
+        let quantity = page.dialogs.elements.quantityUp.val();
+
+        let avatarFile = page.dialogs.elements.imageFileUp[0].files[0];
+
+        if (avatarFile == undefined) {
+            avatarFile = null;
+        }
+
+        let formData = new FormData();
+        formData.append("name", name);
+        formData.append("author", author);
+        formData.append("price", price);
+        formData.append("quantity", quantity);
+        formData.append("avatarFile", avatarFile);
+
+        $.ajax({
+            type: 'POST',
+            contentType: false,
+            cache: false,
+            processData: false,
+            url: page.urls.doUpdate + '/' + currentBookId,
+            data: formData,
+        })
+            .done((data) => {
+
+                book = data;
+                bookAvatar = data.bookAvatar;
+
+                let str = renderBook(book, bookAvatar);
+                $('#tr_' + currentBookId).replaceWith(str);
+
+                toastSuccess("Update Book successfully");
+
+                page.dialogs.elements.modalUpdateBook.modal('hide');
+
+                page.commands.addEventClick();
+
+            })
+            .fail((jqXHR) => {
+                let statusCode = jqXHR.status;
+                if (statusCode === 404) {
+                    toastError('Book not found');
+                } else {
+                    toastError("Create Book fail");
+                }
+            })
+    }
+
+    page.dialogs.commands.doCreate = () => {
+        let name = page.dialogs.elements.nameCre.val().trim();
+        let author = page.dialogs.elements.authorCre.val();
+        let price = page.dialogs.elements.priceCre.val();
+        let quantity = page.dialogs.elements.quantityCre.val();
+
+        let avatarFile = page.dialogs.elements.imageFile[0].files[0];
+
+        if (avatarFile == undefined) {
+            avatarFile = null;
+        }
+
+        let formData = new FormData();
+        formData.append("name", name);
+        formData.append("author", author);
+        formData.append("price", price);
+        formData.append("quantity", quantity);
+        formData.append("avatarFile", avatarFile);
+
+
+
+        $.ajax({
+            type: 'POST',
+            contentType: false,
+            cache: false,
+            processData: false,
+            url: page.urls.doCreate,
+            data: formData,
+        })
+            .done((data) => {
+
+                page.dialogs.commands.doEveryThing();
+
+                page.dialogs.elements.modalCreateBook.modal('hide');
+
+                toastSuccess("Create Book successfully");
+
+            })
+            .fail((jqXHR) => {
+                let statusCode = jqXHR.status;
+                if (statusCode === 409) {
+                    toastError('The name of book is exists');
+                }
+                else if(statusCode === 406){
+                    toastError('Image must be JPG or PNG');
+                }
+                else if(statusCode === 413){
+                    toastError('Image size to large');
+                }
+                else {
+                    toastError("Create Book fail");
+                }
+            })
+    }
+
+    $(".modal").on('hidden.bs.modal', () => {
+        $('.modal form').validate().resetForm();
+        page.dialogs.elements.createForm[0].reset();
+        page.dialogs.elements.updateForm[0].reset();
+        $(".modal .modal-alert-danger").removeClass("show").addClass("hide");
+        $('.modal .modal-alert-danger').empty().removeClass("show").addClass("hide");
+        $('.modal form').find("input.error").removeClass("error");
+    })
+
+    page.dialogs.elements.createForm.validate({
+        rules: {
+            nameCre: {
+                required: true,
+            },
+            authorCre: {
+                required: true,
+            },
+            priceCre: {
+                required: true,
+                number: true,
+                min: 1,
+                max: 10000000
+            },
+            quantityCre: {
+                required: true,
+                number: true,
+                min: 1,
+                max: 1000
+            },
+            avatarFile: {
+                required: true
+            }
+        },
+        messages: {
+            nameCre: {
+                required: "Name is required",
+            },
+            authorCre: {
+                required: "Author is required",
+            },
+            priceCre: {
+                required: "Price is required",
+                number: "Price is required",
+                min: "Price min is 10.000 đ",
+                max: "Price max is 10.000.000 đ",
+            },
+            quantityCre: {
+                required: "Quantity is required",
+                number: "Quantity must be number",
+                min: "Quantity min is 1",
+                max: "Quantity max is 1000",
+            },
+            avatarFile: {
+                required: "Avatar is required"
+            }
+        },
+        errorLabelContainer: "#modalCreateBook .modal-alert-danger",
+        errorPlacement: function (error, element) {
+            error.appendTo("#modalCreateBook .modal-alert-danger");
+        },
+        showErrors: function (errorMap, errorList) {
+            if (this.numberOfInvalids() > 0) {
+                $("#modalCreateBook .modal-alert-danger").removeClass("hide").addClass("show");
+            } else {
+                $("#modalCreateBook .modal-alert-danger").removeClass("show").addClass("hide").empty();
+                $("#createForm input.error").removeClass("error");
+            }
+            this.defaultShowErrors();
+        },
+        submitHandler: function () {
+            page.dialogs.commands.doCreate();
+        }
+    });
+
+    page.dialogs.elements.updateForm.validate({
+        rules: {
+            nameUp: {
+                required: true,
+            },
+            authorUp: {
+                required: true,
+            },
+            priceUp: {
+                required: true,
+                number: true,
+                min: 1,
+                max: 10000000
+            },
+            quantityUp: {
+                required: true,
+                number: true,
+                min: 1,
+                max: 1000
+            },
+        },
+        messages: {
+            nameUp: {
+                required: "Name is required",
+            },
+            authorUp: {
+                required: "Author is required",
+            },
+            priceUp: {
+                required: "Price is required",
+                number: "Price is required",
+                min: "Price min is 10.000 đ",
+                max: "Price max is 10.000.000 đ",
+            },
+            quantityUp: {
+                required: "Quantity is required",
+                number: "Quantity must be number",
+                min: "Quantity min is 1",
+                max: "Quantity max is 1000",
+            },
+        },
+        errorLabelContainer: "#modalUpdateBook .modal-alert-danger",
+        errorPlacement: function (error, element) {
+            error.appendTo("#modalUpdateBook .modal-alert-danger");
+        },
+        showErrors: function (errorMap, errorList) {
+            if (this.numberOfInvalids() > 0) {
+                $("#modalUpdateBook .modal-alert-danger").removeClass("hide").addClass("show");
+            } else {
+                $("#modalUpdateBook .modal-alert-danger").removeClass("show").addClass("hide").empty();
+                $("#updateForm input.error").removeClass("error");
+            }
+            this.defaultShowErrors();
+        },
+        submitHandler: function () {
+            page.dialogs.commands.doUpdate();
+        }
+    });
+
+    page.dialogs.elements.btnCreateBook.on('click' , () => {
+        page.dialogs.elements.createForm.trigger('submit');
+    })
+
+    page.dialogs.elements.btnUpdateBook.on('click' , () => {
+        page.dialogs.elements.updateForm.trigger('submit');
+    })
+
+    page.dialogs.elements.btnSearch.on('click' , () => {
+        keyWord = page.dialogs.elements.keyWord.val();
+        page.dialogs.commands.doEveryThing();
+    })
+
+    page.loadData.findBookById = (id) => {
+        return $.ajax({
+            type: 'GET',
+            url: page.urls.findBookById + '/' + id
+        })
+            .done((data) => {
+
+            })
+            .fail(() => {
+                ;
+            })
+    }
+
+    page.commands.addEventClick = () => {
+        page.commands.addEventEditClick();
+        page.commands.addEventDeleteClick();
+        page.commands.handleAddEventPageLink();
+        page.commands.addeventSort();
+    }
+
+    page.commands.addEventEditClick = () => {
+
+        $('.edit').off('click');
+
+        $('.edit').on('click', function () {
+
+            $('#updateForm')[0].reset();
+
+            let bookId = $(this).data('id');
+
+            page.loadData.findBookById(bookId).then((data) => {
+
+                book = data;
+                bookAvatar.fileFolder = data.fileFolder;
+                bookAvatar.fileName = data.fileName;
+                bookAvatar.fileUrl = data.fileUrl;
+
+                currentBookId = bookId;
+
+                page.dialogs.elements.nameUp.val(book.name);
+                page.dialogs.elements.authorUp.val(book.author);
+                page.dialogs.elements.priceUp.val(book.price);
+                page.dialogs.elements.quantityUp.val(book.quantity);
+
+                page.dialogs.commands.loadImageToCanvas(null, "URL", bookAvatar.fileUrl);
+
+                page.dialogs.elements.modalUpdateBook.modal('show');
+
+
+            })
+                .catch(() => {
+                    toastError("Book id not exist");
+                });
+        })
+    }
+
+    page.commands.addEventDeleteClick = () => {
+
+        $('.delete').off('click');
+
+        $('.delete').on('click', function () {
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    let bookId = $(this).data('id');
+
+                    page.loadData.findBookById(bookId).then((data) => {
+                        $.ajax({
+                            headers: {
+                                'accept': 'application/json',
+                                'content-type': 'application/json'
+                            },
+                            type: 'POST',
+                            url: page.urls.doDelete + '/' + bookId,
+                            // data: JSON.stringify(obj)
+                        })
+                            .done((data) => {
+
+                                $('#tr_' + bookId).remove();
+
+                                currentPageNumber = $('#pageActive').data('page');
+
+                                page.dialogs.commands.doEveryThing();
+
+                                page.commands.addEventClick();
+
+                                Swal.fire({
+                                    position: 'middle-end',
+                                    icon: 'success',
+                                    title: 'Deleted Successfully',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                })
+                            })
+                            .fail((error) => {
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'error',
+                                    title: 'You dont have permition to do this',
+                                    showConfirmButton: true
+                                })
+                            })
+                    })
+                }
+            })
+                .catch(() => {
+                    toastError("Book id not exist");
+                });
+
+
+        })
+    }
+
+    function renderBook(book, bookAvatar) {
+        let image_thumbnail = `
+                ${AppBase.API_CLOUDINARY}/${AppBase.SCALE_IMAGE_W_90_H_160_Q_100}/${bookAvatar.fileFolder}/${bookAvatar.fileName}
+            `;
+        return `
+                    <tr id="tr_${book.id}" class="hover" style="font-weight: 600;">
+                                    <td style="padding-left:10px" id="td_${book.id}"></td>
+                                    <td><img src="${image_thumbnail}" alt=""></td>
+                                    <td>${book.name}</td>
+                                    <td>${book.author}</td>
+                                    <td>${book.price}</td>
+                                    <td>${book.quantity}</td>
+                                    <td style="display: flex; justify-content: center; align-items: center; padding-top: 27px">
+                                        <div class="edit" data-id="${book.id}">
+                                            <i class="fa-regular fa-pen-to-square"  title="Edit"></i>
+                                        </div>
+                                        |
+                                        <div class="delete" data-id="${book.id}">
+                                            <i class="fa-regular fa-trash-can" title="Delete"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                `;
+    }
+
+    function renderPagination(totalPages, selectedPage) {
+
+        let str = "";
+
+
+        if (currentPageNumber != 0) {
+            str += `
+                            <li class="page-item">
+                                <a class="page-link " href="#" aria-label="Previous" data-page="${currentPageNumber-1}">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                        `;
+        }
+
+        for(let i = 1; i <= totalPages ; i++ ) {
+            if ((i - 1 ) === selectedPage) {
+                str += `
+                    <li class="page-item active" style="display: flex">
+                        <a id="pageActive" class="page-link" href="#" data-page="${i-1}">${i}</a>
+                    </li>
+                `;
+            }
+            else {
+                str += `
+                    <li class="page-item" style="display: flex">
+                        <a class="page-link" href="#" data-page="${i-1}">${i}</a>
+                    </li>
+                `;
+            }
+        }
+
+        if(currentPageNumber != (totalPages - 1)){
+            str += `
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next" data-page="${currentPageNumber+1}">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                `;
+        }
+
+        return str;
+    }
+
+    page.commands.handleAddEventPageLink = () => {
+        $('.page-link').on('click', function () {
+
+            let pageNumber = $(this).data('page');
+
+            currentPageNumber = pageNumber;
+
+            keyWord = page.dialogs.elements.keyWord.val();
+
+            page.dialogs.commands.doEveryThing()
+        })
+    }
+
+    page.commands.addeventSort = () => {
+        $('.sort').off('click');
+
+        $('.sort').on('click', function () {
+
+            $('.sort').removeClass('sort-active');
+            $(this).addClass('sort-active');
+
+            page.dialogs.elements.sort_column.val($(this).data('column'));
+            page.dialogs.elements.sort_orderBy.val($(this).data('ascdesc'));
+
+            column =  page.dialogs.elements.sort_column.val();
+            orderBy = page.dialogs.elements.sort_orderBy.val();
+
+            keyWord = page.dialogs.elements.keyWord.val();
+
+            page.dialogs.commands.doEveryThing();
+        })
+    }
+
+    page.dialogs.commands.loadImageToCanvas = (imageFile, fileType, imageUrl) => {
+        page.dialogs.elements.imagePreviewCanvas.css("display", "");
+        page.dialogs.elements.wrapper.addClass("active");
+        page.dialogs.elements.wrapperContent.css("opacity", 0);
+
+        page.dialogs.elements.imagePreviewCanvasUp.css("display", "");
+        page.dialogs.elements.wrapper.addClass("active");
+        page.dialogs.elements.wrapperContent.css("opacity", 0);
+
+        let imageObj = new Image();
+
+        imageObj.onload = function () {
+            page.dialogs.elements.context.canvas.width = imageObj.width;
+            page.dialogs.elements.context.canvas.height = imageObj.height;
+            page.dialogs.elements.context.drawImage(imageObj, 0, 0, imageObj.width, imageObj.height);
+
+            page.dialogs.elements.contextUp.canvas.width = 445;
+            page.dialogs.elements.contextUp.canvas.height = 345;
+            page.dialogs.elements.contextUp.drawImage(imageObj, 0, 0, 445, 345);
+        };
+
+        if (fileType === "BINARY") {
+            imageObj.src = URL.createObjectURL(imageFile);
+        }
+        else {
+            imageObj.src = imageUrl;
+        }
+    }
+
+    page.dialogs.commands.changeImagePreview = (elem) => {
+        let imageFile = elem[0].files[0];
+
+        if (imageFile) {
+            let reader = new FileReader();
+
+            reader.readAsDataURL(imageFile);
+
+            reader.onload = function (e) {
+                if (e.target.readyState === FileReader.DONE) {
+                    page.dialogs.commands.loadImageToCanvas(imageFile, "BINARY", null);
+                }
+            }
+        }
+        else {
+            page.dialogs.commands.clearImagePreview();
+        }
+    }
+
+    page.dialogs.commands.clearImagePreview = () => {
+        page.dialogs.elements.imageFile.val("");
+        page.dialogs.elements.imagePreviewCanvas.css("display", "none");
+        page.dialogs.elements.wrapper.removeClass("active");
+        page.dialogs.elements.wrapperContent.css("opacity", 1);
+    }
+
+    page.commands.loadData = () => {
+        page.dialogs.commands.doEveryThing();
+    }
+
+    page.initializeControlEvent = () => {
+
+        page.dialogs.elements.divImagePreview.on('click', () => {
+            page.dialogs.elements.imageFile.trigger('click');
+        })
+
+        page.dialogs.elements.divFileName.on('click', () => {
+            page.dialogs.elements.imageFile.trigger('click');
+        })
+
+        page.dialogs.elements.divImagePreviewUp.on('click', () => {
+            page.dialogs.elements.imageFileUp.trigger('click');
+        })
+
+        page.dialogs.elements.divFileNameUp.on('click', () => {
+            page.dialogs.elements.imageFileUp.trigger('click');
+        })
+
+        page.dialogs.elements.imageFile.on("change", function () {
+            page.dialogs.commands.changeImagePreview(page.dialogs.elements.imageFile);
+        });
+
+        page.dialogs.elements.imageFileUp.on("change", function () {
+            page.dialogs.commands.changeImagePreview(page.dialogs.elements.imageFileUp);
+        });
+
+        page.dialogs.elements.btnClearImagePreview.on('click', () => {
+            page.dialogs.commands.clearImagePreview();
+        })
+
+        page.elements.btnShowCreateModal.on('click', () => {
+            $('#createForm')[0].reset();
+            page.dialogs.commands.clearImagePreview();
+            page.dialogs.elements.modalCreateBook.modal('show');
+        })
+
+
+    }
+
+    $(() => {
+        page.commands.loadData();
+
+        page.initializeControlEvent();
+    })
+
+</script>
+<!-- -----------------------------------End Script---------------------------------- -->
+</body>
+</html>

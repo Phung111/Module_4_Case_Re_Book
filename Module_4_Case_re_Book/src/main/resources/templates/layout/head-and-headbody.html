@@ -1,0 +1,74 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<th:block th:fragment="head-and-headbody">
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/assets/css/my-css.css">
+
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/><link rel="stylesheet" href="/assets/css/preview-image.css">
+
+    <link rel="stylesheet" href="/assets/fontawesome/v6.2.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/assets/sweetalert2/v11.7.3/sweetalert2.min.css">
+
+    <link rel="stylesheet" href="/assets/iziToast/toastr.min.css">
+
+    <script src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </head>
+  <body>
+  <div class="back-ground border-radius">
+    <div class="side-head-content border-radius">
+      <div class="side border-radius">
+        <div class="side-head border-radius">
+          <h5 style="font-weight: bold; color: var(--xanh-3);">BOOK STORE</h5>
+          <div class="dropdown">
+            <div id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="./assets/img/anya.jpg" width="50" height="50" class="rounded-circle">
+            </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="/logout">Logout</a>
+            </div>
+          </div>
+        </div>
+        <div class="side-content-home border-radius">
+          <a href="/">
+            <div class="side-content-sub hover">
+              <i class="fa-solid fa-house"></i>
+              <p>Home</p>
+            </div>
+          </a>
+        </div>
+        <div class="side-content border-radius">
+          <div class="side-content-head"><h5>Book</h5></div>
+          <a href="/books">
+            <div class="side-content-sub hover">
+              <i class="fa-regular fa-rectangle-list"></i>
+              <p>List</p>
+            </div>
+          </a>
+          <a href="/cart">
+            <div class="side-content-sub hover">
+              <i class="fas fa-cart-plus"></i>
+              <p>Cart</p>
+            </div>
+          </a>
+          <a href="/checkout">
+            <div class="side-content-sub hover">
+              <i class="fas fa-cart-arrow-down"></i>
+              <p>Checkout</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+</th:block>

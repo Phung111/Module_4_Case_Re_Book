@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+
+  <link rel="stylesheet" href="/assets/css/my-css.css">
+
+  <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/><link rel="stylesheet" href="/assets/css/preview-image.css">
+
+  <link rel="stylesheet" href="/assets/fontawesome/v6.2.0/css/all.min.css">
+
+  <link rel="stylesheet" href="/assets/sweetalert2/v11.7.3/sweetalert2.min.css">
+
+  <link rel="stylesheet" href="/assets/iziToast/toastr.min.css">
+
+  <style>
+    input[readonly] {
+      background-color: rgb(197, 228, 255);
+    }
+    body{
+      background-color: rgb(195, 252, 229);
+    }
+
+
+  </style>
+</head>
+
+<body>
+<div class="register-container " style="display: flex; justify-content: center; margin-top: 70px; ">
+  <div style="width: 500px; border: 1px solid rgba(0, 0, 0, 0.1); padding: 10px;background-color: white; border-radius: 20px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);">
+    <h2>Register</h2>
+    <form>
+      <!-- 2 column grid layout with text inputs for the first and last names -->
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <input type="text" class="form-control" id="userNameReg" name="userNameReg"/>
+            <label  class="form-label" for="userNameReg">Username</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Password input -->
+      <div class="form-outline mb-4">
+        <input type="text" class="form-control" name="passwordReg" id="passwordReg"/>
+        <label class="form-label" for="passwordReg">Password</label>
+      </div>
+
+      <!-- Password input -->
+      <div class="form-outline mb-4">
+        <select id="roleReg" class="form-select" name="roleReg"></select>
+        <label class="form-label" for="roleReg">Role</label>
+      </div>
+
+      <!-- Submit button -->
+      <button id="btnRegister" type="button" class="btn btn-success btn-block mb-4" style="width: 100%;">Sign up</button>
+
+      <!-- Register buttons -->
+      <div class="text-center">
+        <p>Already have account? <a href="/login">Login</a></p>
+      </div>
+    </form>
+  </div>
+</div>
+
+<th:block th:replace="layout/ajax-script"/>
+
+<script>
+
+  const page = {
+    urls: {
+      register: AppBase.API_AUTH + '/register',
+      getAllRoles: AppBase.API_AUTH + '/roles'
+    },
+    elements: {},
+    loadData: {},
+    commands: {},
+    dialogs: {
+      elements: {},
+      loadData: {},
+      commands: {},
+    }
+  }
+
+  page.elements.usernameReg = $('#userNameReg');
+  page.elements.passwordReg = $('#passwordReg');
+  page.elements.roleReg = $('#roleReg');
+  page.elements.btnRegister = $('#btnRegister');
+
+  page.dialogs.elements.roleReg = $('#roleReg')
+
+  page.elements.btnRegister.on('click', () => {
+    let username = page.elements.usernameReg.val();
+    let password = page.elements.passwordReg.val();
+
+    let id = page.elements.roleReg.val();
+    let code = page.elements.roleReg.find("option:selected").text();
+    let role = {
+      id,
+      code
+    }
+
+    let obj = {
+      username,
+      password,
+      role
+    }
+
+    $.ajax({
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      type: 'POST',
+      url: page.urls.register,
+      data: JSON.stringify(obj)
+    })
+            .done((data) => {
+
+              toastSuccess("Register Successfully")
+
+              setTimeout(() => {
+                location.href = "/login";
+              }, 2000)
+
+            })
+            .fail((jqXHR) => {
+              console.log(jqXHR);
+              toastError("Register Fail")
+            })
+  })
+
+  page.loadData.getAllRoles = () => {
+    $.ajax({
+      type: 'GET',
+      url: page.urls.getAllRoles
+    })
+            .done((data) => {
+              $.each(data, (i, item) => {
+                let str = renderRoleOption(item);
+                page.dialogs.elements.roleReg.append(str);
+              })
+
+            })
+            .fail((error) => {
+              console.log(error);
+            })
+  }
+
+  function renderRoleOption(obj) {
+    return `
+                    <option value="${obj.id}">${obj.code}</option>
+                `;
+  }
+
+  page.commands.loadData = () => {
+    page.loadData.getAllRoles();
+  }
+
+  page.initializeControlEvent = () => {
+
+  }
+
+  $(() => {
+    page.commands.loadData();
+
+    page.initializeControlEvent();
+
+  })
+
+</script>
+</body>
+</html>
