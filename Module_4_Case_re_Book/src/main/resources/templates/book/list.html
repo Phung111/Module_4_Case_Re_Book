@@ -1,5 +1,6 @@
 
 <th:block th:replace="layout/head-and-headbody"/>
+
 <!-- ------------------------------------Modal Create----------------------------------- -->
 <div class="cover-modal">
     <div id="modalCreateBook" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
@@ -206,7 +207,12 @@
                                 <input type="hidden" id="sort_orderBy" >
                             </div>
                         </th>
-                        <th>Author</th>
+                        <th>Author
+                            <div style="display: flex; flex-direction: column; padding-left: 5px; align-items: center;">
+                                <i class="fa-solid fa-sort-up sort" data-column="author" data-ascdesc="asc"></i>
+                                <i class="fa-solid fa-sort-down sort sort-active" data-column="author" data-ascdesc="desc"></i>
+                            </div>
+                        </th>
                         <th>Price</th>
                         <th style="width: 60px;">Action</th>
                     </tr>
@@ -266,6 +272,8 @@
     let keyWord = $('#keyWord').val();
     let column = "";
     let orderBy = "";
+
+    let numberOrder = 0;
 
     let book = new Book();
     let bookAvatar = new BookAvatar();
@@ -358,10 +366,13 @@
                     let str = renderBook(book, bookAvatar);
                     $('#tbBook tbody').append(str);
 
-                    let numberOrder = 0;
 
-                    if( column == 'id' & orderBy == 'asc'){
-                        numberOrder = (5 * (totalPages-currentPageNumber-1)) - i + 2;
+
+                    if( column == 'id' & orderBy == 'desc'){
+                        // totalElements -= 1;
+                        // numberOrder = totalElements - (totalPages - currentPageNumber ) + 1;
+                        let temp = totalPages*5 - totalElements ;
+                        numberOrder = (5 * (totalPages-currentPageNumber)) - i - temp;
                     } else {
                         numberOrder = (5 * currentPageNumber) + i + 1;
                     }
@@ -369,13 +380,6 @@
                     $('#td_' + book.id).append(numberOrder);
 
                 })
-
-                // for (let i = totalElements; i > 0; i--){
-                //     let numberOrder = (5 * currentPageNumber) + i + 1;
-                //     $('#td_' + book.id).append(numberOrder);
-                // }
-
-
 
                 let strPage = renderPagination(totalPages, selectedPage);
                 $('#renderPage').empty().append(strPage);
@@ -409,6 +413,7 @@
         formData.append("quantity", quantity);
         formData.append("avatarFile", avatarFile);
 
+        page.commands.addLoading();
         $.ajax({
             type: 'POST',
             contentType: false,
@@ -419,11 +424,7 @@
         })
             .done((data) => {
 
-                book = data;
-                bookAvatar = data.bookAvatar;
-
-                let str = renderBook(book, bookAvatar);
-                $('#tr_' + currentBookId).replaceWith(str);
+                page.dialogs.commands.doEveryThing();
 
                 toastSuccess("Update Book successfully");
 
@@ -439,10 +440,14 @@
                 } else {
                     toastError("Create Book fail");
                 }
-            })
+            }).always(function () {
+            page.commands.removeLoading();
+        })
     }
 
     page.dialogs.commands.doCreate = () => {
+
+
         let name = page.dialogs.elements.nameCre.val().trim();
         let author = page.dialogs.elements.authorCre.val();
         let price = page.dialogs.elements.priceCre.val();
@@ -462,7 +467,7 @@
         formData.append("avatarFile", avatarFile);
 
 
-
+        page.commands.addLoading();
         $.ajax({
             type: 'POST',
             contentType: false,
@@ -475,7 +480,7 @@
 
                 page.dialogs.commands.doEveryThing();
 
-                page.dialogs.elements.modalCreateBook.modal('hide');
+                page.dialogs.elements.modalCreateBook.modal('fade');
 
                 toastSuccess("Create Book successfully");
 
@@ -494,7 +499,13 @@
                 else {
                     toastError("Create Book fail");
                 }
-            })
+            }).always(function () {
+            page.commands.removeLoading();
+        })
+
+
+
+
     }
 
     $(".modal").on('hidden.bs.modal', () => {
@@ -870,6 +881,14 @@
         })
     }
 
+    page.commands.addLoading = () => {
+        $('.loading-loading').removeClass('d-none');
+    }
+
+    page.commands.removeLoading = () => {
+        $('.loading-loading').addClass('d-none');
+    }
+
     page.dialogs.commands.loadImageToCanvas = (imageFile, fileType, imageUrl) => {
         page.dialogs.elements.imagePreviewCanvas.css("display", "");
         page.dialogs.elements.wrapper.addClass("active");
@@ -926,6 +945,8 @@
     }
 
     page.commands.loadData = () => {
+        column = 'id';
+        orderBy = 'desc';
         page.dialogs.commands.doEveryThing();
     }
 

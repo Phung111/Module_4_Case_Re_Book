@@ -314,4 +314,23 @@ input.error {
     display: none;
 }
 
+#loading {
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1000000;
+}
+
+#loading>.spinner-border {
+    width: 75px;
+    height: 75px;
+}
+
+
+
 
